@@ -5,18 +5,19 @@ import grails.util.Environment
 import com.newrelic.api.agent.NewRelic
 
 class NewRelicTagLib {
+
     static namespace = "newrelic"
 
     GrailsApplication grailsApplication
 
     def browserTimingHeader = {
-        if(enabled) {
+        if (enabled) {
             out << NewRelic.browserTimingHeader
         }
     }
 
     def browserTimingFooter = {
-        if(enabled) {
+        if (enabled) {
             out << NewRelic.browserTimingFooter
         }
     }
