@@ -84,19 +84,22 @@ On newer versions of grails that use a forked jvm, you may need to include the j
 grails.tomcat.jvmArgs = ["-javaagent:/path/to/newrelic.jar"]
 ```
 
-# BONUS - Installing configuring NewRelic on AWS Elastic Beanstalk
+# BONUS - Installing and configuring NewRelic on AWS Elastic Beanstalk
 
 Here are some instructions to install/configure NewRelic app AND server monitoring on AWS ElasticBeanstalk.
 It will also call the NewRelic deployment API each time you start a new env.
 
 1- Create a folder `src/main/webapp/.ebextensions`, a folder `src/main/webapp/.ebextensions/files` and add the `newrelic.jar` in it.
 
-2- Create a file `src/main/webapp/.ebextensions/app.config`
+2- Create a file `src/main/webapp/.ebextensions/files/newrelic.yml.sh` (to dynamically generate newrelic.yml based on app env properties)
 
-```
-container_commands:
-  newrelic:
-    command: "bash -x .ebextensions/newrelic.sh"
+```bash
+cat << EOF
+common: &default_settings
+license_key: '$NR_LICENSE'
+enable_auto_transaction_naming: false
+app_name: $NR_APPNAME
+EOF
 ```
 
 3- Create a file `src/main/webapp/.ebextensions/newrelic.sh`
@@ -119,15 +122,12 @@ export AP_VERSION=`` `cat ./META-INF/grails.build.info | grep info.app.version |
 java -jar /var/lib/newrelic/newrelic.jar deployment –revision=$AP_VERSION
 ```
 
-4- Create a file `src/main/webapp/.ebextensions/files/newrelic.yml.sh` (to dynamically generate newrelic.yml based on app env properties)
+4- Create a file `src/main/webapp/.ebextensions/app.config`
 
-```bash
-cat << EOF
-common: &default_settings
-license_key: '$NR_LICENSE'
-enable_auto_transaction_naming: false
-app_name: $NR_APPNAME
-EOF
+```
+container_commands:
+  newrelic:
+    command: "bash -x .ebextensions/newrelic.sh"
 ```
 
 Then, in your Beanstalk app config options, add `-javaagent:/var/lib/newrelic/newrelic.jar` to the JVM command line parameter and set `NR_LICENSE` and `NR_APPNAME` env properties.
