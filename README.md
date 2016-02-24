@@ -84,6 +84,54 @@ On newer versions of grails that use a forked jvm, you may need to include the j
 grails.tomcat.jvmArgs = ["-javaagent:/path/to/newrelic.jar"]
 ```
 
+# BONUS - Installing configuring NewRelic on AWS Elastic Beanstalk
+
+Here are some instructions to install/configure NewRelic app AND server monitoring on AWS ElasticBeanstalk.
+It will also call the NewRelic deployment API each time you start a new env.
+
+1- Create a folder `src/main/webapp/.ebextensions`, a folder `src/main/webapp/.ebextensions/files` and add the `newrelic.jar` in it.
+
+2- Create a file `src/main/webapp/.ebextensions/app.config`
+
+```
+container_commands:
+  newrelic:
+    command: "bash -x .ebextensions/newrelic.sh"
+```
+
+3- Create a file `src/main/webapp/.ebextensions/newrelic.sh`
+
+```bash
+#!/bin/sh
+# New Relic (Application monitoring)
+mkdir /var/lib/newrelic
+mv ./.ebextensions/files/newrelic*.jar /var/lib/newrelic/
+bash ./.ebextensions/files/newrelic.yml.sh > /var/lib/newrelic/newrelic.yml
+
+# New Relic Agent (Server monitoring)
+rpm -Uvh https://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
+yum -y install newrelic-sysmond
+/usr/sbin/nrsysmond-config –set license_key=$NR_LICENSE
+/etc/init.d/newrelic-sysmond start
+
+# New Relic deployment event
+export AP_VERSION=`` `cat ./META-INF/grails.build.info | grep info.app.version | cut -d= -f2` ``
+java -jar /var/lib/newrelic/newrelic.jar deployment –revision=$AP_VERSION
+```
+
+4- Create a file `src/main/webapp/.ebextensions/files/newrelic.yml.sh` (to dynamically generate newrelic.yml based on app env properties)
+
+```bash
+cat << EOF
+common: &default_settings
+license_key: '$NR_LICENSE'
+enable_auto_transaction_naming: false
+app_name: $NR_APPNAME
+EOF
+```
+
+Then, in your Beanstalk app config options, add `-javaagent:/var/lib/newrelic/newrelic.jar` to the JVM command line parameter and set `NR_LICENSE` and `NR_APPNAME` env properties.
+
 # Bugs
 
 To report any bug, please use the project [Issues](http://github.com/agorapulse/grails-newrelic/issues) section on GitHub.
