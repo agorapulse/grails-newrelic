@@ -11,7 +11,7 @@ buildscript {
     }
 }
 
-version "$newrelicApiVersion"
+version newrelicApiVersion
 group "org.grails.plugins"
 
 apply plugin:"eclipse"
