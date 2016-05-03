@@ -2,6 +2,7 @@ NewRelic Grails Plugin
 ======================
 
 [![Build Status](https://travis-ci.org/agorapulse/grails-newrelic.svg)](https://travis-ci.org/agorapulse/grails-newrelic)
+[![Download](https://api.bintray.com/packages/agorapulse/plugins/newrelic/images/download.svg)](https://bintray.com/agorapulse/plugins/newrelic/_latestVersion)
 
 # Introduction
 
