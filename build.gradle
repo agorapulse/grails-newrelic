@@ -1,7 +1,4 @@
 buildscript {
-    ext {
-        grailsVersion = project.grailsVersion
-    }
     repositories {
         mavenLocal()
         maven { url "https://repo.grails.org/grails/core" }
@@ -19,12 +16,6 @@ apply plugin:"idea"
 apply plugin:"org.grails.grails-plugin"
 apply plugin:"org.grails.grails-plugin-publish"
 apply plugin:"org.grails.grails-gsp"
-
-ext {
-    grailsVersion = project.grailsVersion
-    gradleWrapperVersion = project.gradleWrapperVersion
-    newrelicApiVersion = project.newrelicApiVersion
-}
 
 repositories {
     mavenLocal()
@@ -55,10 +46,6 @@ dependencies {
 
     // Latest NewRelic API lib
     compile "com.newrelic.agent.java:newrelic-api:$newrelicApiVersion"
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = gradleWrapperVersion
 }
 
 grailsPublish {
