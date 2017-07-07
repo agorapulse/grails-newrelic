@@ -1,7 +1,7 @@
 package grails.plugin.newrelic
 
 import com.newrelic.api.agent.NewRelic
-import com.newrelic.api.agent.Request
+import com.newrelic.api.agent.ExtendedRequest
 import com.newrelic.api.agent.Response
 import grails.core.GrailsApplication
 import grails.util.Environment
@@ -14,87 +14,87 @@ class NewRelicService {
     // Record metrics
    	def recordResponseTimeMetric(String name, long millis) {
         if (enabled) {
-            NewRelic.recordResponseTimeMetric(name, millis);
+            NewRelic.recordResponseTimeMetric(name, millis)
         }
     }
 
     def recordMetric(String name, float value) {
         if (enabled) {
-            NewRelic.recordMetric(name, value);
+            NewRelic.recordMetric(name, value)
         }
     }
 
    	def incrementCounter(String name) {
         if (enabled) {
-            NewRelic.incrementCounter(name);
+            NewRelic.incrementCounter(name)
         }
     }
 
     def incrementCounter(String name, int count) {
         if (enabled) {
-            NewRelic.incrementCounter(name, count);
+            NewRelic.incrementCounter(name, count)
         }
     }
 
     // Record errors
    	def noticeError(Throwable throwable, Map<String, String> params) {
         if (enabled) {
-            NewRelic.noticeError(throwable, params);
+            NewRelic.noticeError(throwable, params)
         }
     }
 
    	def noticeError(Throwable throwable) {
         if (enabled) {
-            NewRelic.noticeError(throwable);
+            NewRelic.noticeError(throwable)
         }
     }
 
    	def noticeError(String message, Map<String, String> params) {
         if (enabled) {
-            NewRelic.noticeError(message, params);
+            NewRelic.noticeError(message, params)
         }
     }
 
     def noticeError(String message) {
         if (enabled) {
-            NewRelic.noticeError(message);
+            NewRelic.noticeError(message)
         }
     }
 
     // Record transaction info
     def setTransactionName(String name, String url) {
         if (enabled) {
-            NewRelic.setTransactionName(name, url);
+            NewRelic.setTransactionName(name, url)
         }
     }
 
     def addCustomParameter(String key, String value) {
         if (enabled) {
-            NewRelic.addCustomParameter(key, value);
+            NewRelic.addCustomParameter(key, value)
         }
     }
 
     def addCustomParameter(String key, Number value) {
         if (enabled) {
-            NewRelic.addCustomParameter(key, value);
+            NewRelic.addCustomParameter(key, value)
         }
     }
 
-    def setRequestResponse(Request request, Response response) {
+    def setRequestResponse(ExtendedRequest request, Response response) {
         if (enabled) {
-            NewRelic.setRequestAndResponse(request, response);
+            NewRelic.setRequestAndResponse(request, response)
         }
     }
 
     def ignoreTransaction() {
         if (enabled) {
-            NewRelic.ignoreTransaction();
+            NewRelic.ignoreTransaction()
         }
     }
 
     def ignoreApdex() {
         if (enabled) {
-            NewRelic.ignoreApdex();
+            NewRelic.ignoreApdex()
         }
     }
 
