@@ -35,6 +35,9 @@ dependencies {
 }
 ```
 
+Thanks to binary incompability of trait between the different Groovy version, current version can be used with Grails `3.2.11` and newer.
+Try older versions of this plugin if you need to use it with older version of Grails.
+
 # Config
 
 By default the New Relic RUM code will only be enabled for Production environments. 
