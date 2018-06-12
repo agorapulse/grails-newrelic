@@ -1,0 +1,12 @@
+grailsPublish {
+    userOrg = 'agorapulse'
+    githubSlug = 'agorapulse/grails-newrelic'
+    license {
+        name = 'Apache-2.0'
+    }
+    title = 'newrelic'
+    desc = 'Grails NewRelic plugin'
+    developers = [benorama: 'Benoit Hediard']
+    portalUser = ''
+    portalPassword = ''
+}

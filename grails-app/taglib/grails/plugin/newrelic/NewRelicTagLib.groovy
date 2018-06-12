@@ -1,12 +1,15 @@
 package grails.plugin.newrelic
 
+import com.newrelic.api.agent.NewRelic
 import grails.core.GrailsApplication
 import grails.util.Environment
-import com.newrelic.api.agent.NewRelic
+import groovy.transform.CompileStatic
+import groovy.transform.TypeCheckingMode
 
+@CompileStatic
 class NewRelicTagLib {
 
-    static namespace = "newrelic"
+    static namespace = 'newrelic'
 
     GrailsApplication grailsApplication
 
@@ -22,15 +25,17 @@ class NewRelicTagLib {
         }
     }
 
+    @CompileStatic(TypeCheckingMode.SKIP)
     boolean isEnabled() {
         // default enabled for PROD
         boolean configEnabled = (Environment.current == Environment.PRODUCTION)
 
         // if config specified, use that instead
         if (grailsApplication.config.newrelic) {
-            configEnabled = grailsApplication.config.newrelic.enabled
+            configEnabled = grailsApplication.config.newrelic.enabled as Boolean
         }
 
         return configEnabled
     }
+
 }

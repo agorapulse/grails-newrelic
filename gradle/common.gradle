@@ -1,0 +1,18 @@
+// use UTC timezone by default
+tasks.withType(JavaExec) {
+    systemProperty 'user.timezone', 'UTC'
+}
+
+bootRun {
+    jvmArgs('-Dspring.output.ansi.enabled=always')
+    addResources = true
+    String springProfilesActive = 'spring.profiles.active'
+    systemProperty springProfilesActive, System.getProperty(springProfilesActive)
+}
+
+// enable if you wish to package this plugin as a standalone application
+bootRepackage.enabled = false
+
+task wrapper(type: Wrapper) {
+    gradleVersion = gradleWrapperVersion
+}
