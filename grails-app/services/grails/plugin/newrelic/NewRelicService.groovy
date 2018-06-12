@@ -16,87 +16,87 @@ class NewRelicService {
     GrailsApplication grailsApplication
 
     // Record metrics
-    def recordResponseTimeMetric(String name, long millis) {
+    void recordResponseTimeMetric(String name, long millis) {
         if (enabled) {
             NewRelic.recordResponseTimeMetric(name, millis)
         }
     }
 
-    def recordMetric(String name, float value) {
+    void recordMetric(String name, float value) {
         if (enabled) {
             NewRelic.recordMetric(name, value)
         }
     }
 
-    def incrementCounter(String name) {
+    void incrementCounter(String name) {
         if (enabled) {
             NewRelic.incrementCounter(name)
         }
     }
 
-    def incrementCounter(String name, int count) {
+    void incrementCounter(String name, int count) {
         if (enabled) {
             NewRelic.incrementCounter(name, count)
         }
     }
 
     // Record errors
-    def noticeError(Throwable throwable, Map<String, String> params) {
+    void noticeError(Throwable throwable, Map<String, String> params) {
         if (enabled) {
             NewRelic.noticeError(throwable, params)
         }
     }
 
-    def noticeError(Throwable throwable) {
+    void noticeError(Throwable throwable) {
         if (enabled) {
             NewRelic.noticeError(throwable)
         }
     }
 
-    def noticeError(String message, Map<String, String> params) {
+    void noticeError(String message, Map<String, String> params) {
         if (enabled) {
             NewRelic.noticeError(message, params)
         }
     }
 
-    def noticeError(String message) {
+    void noticeError(String message) {
         if (enabled) {
             NewRelic.noticeError(message)
         }
     }
 
     // Record transaction info
-    def setTransactionName(String name, String url) {
+    void setTransactionName(String name, String url) {
         if (enabled) {
             NewRelic.setTransactionName(name, url)
         }
     }
 
-    def addCustomParameter(String key, String value) {
+    void addCustomParameter(String key, String value) {
         if (enabled) {
             NewRelic.addCustomParameter(key, value)
         }
     }
 
-    def addCustomParameter(String key, Number value) {
+    void addCustomParameter(String key, Number value) {
         if (enabled) {
             NewRelic.addCustomParameter(key, value)
         }
     }
 
-    def setRequestResponse(ExtendedRequest request, Response response) {
+    void setRequestResponse(ExtendedRequest request, Response response) {
         if (enabled) {
             NewRelic.setRequestAndResponse(request, response)
         }
     }
 
-    def ignoreTransaction() {
+    void ignoreTransaction() {
         if (enabled) {
             NewRelic.ignoreTransaction()
         }
     }
 
-    def ignoreApdex() {
+    void ignoreApdex() {
         if (enabled) {
             NewRelic.ignoreApdex()
         }
