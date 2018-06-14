@@ -1,43 +1,43 @@
 package grails.plugin.newrelic
 
-import grails.test.mixin.TestFor
+
+import grails.testing.web.taglib.TagLibUnitTest
 import grails.util.Environment
 import spock.lang.Specification
 
-@TestFor(NewRelicTagLib)
-class NewRelicTagLibSpec extends Specification {
+class NewRelicTagLibSpec extends Specification implements TagLibUnitTest<NewRelicTagLib> {
 
     def "should be enabled for PRODUCTION by default"() {
         when:
             setEnvironment(Environment.PRODUCTION)
 
         then:
-            assert tagLib.enabled == true
+            tagLib.enabled
     }
 
-    def "should be disabled for NON-PRODUCTION by default" () {
+    def "should be disabled for NON-PRODUCTION by default"() {
         when:
             setEnvironment(Environment.CUSTOM)
 
         then:
-            assert tagLib.enabled == false
+            !tagLib.enabled
     }
 
-    def "should be enabled when config enables NewRelic" () {
+    def "should be enabled when config enables NewRelic"() {
         when:
             enableNewRelic(true)
 
         then:
-            assert tagLib.enabled == true
+            tagLib.enabled
     }
 
-    def "should be disabled for PRODUCTION when config disables NewRelic" () {
+    def "should be disabled for PRODUCTION when config disables NewRelic"() {
         when:
             setEnvironment(Environment.PRODUCTION)
             enableNewRelic(false)
 
         then:
-            assert tagLib.enabled == false
+            !tagLib.enabled
     }
 
     private setEnvironment(environment) {
@@ -46,7 +46,7 @@ class NewRelicTagLibSpec extends Specification {
         }
     }
 
-    private enableNewRelic(boolean value){
+    private enableNewRelic(boolean value) {
         config.newrelic = [
                 enabled: value
         ]

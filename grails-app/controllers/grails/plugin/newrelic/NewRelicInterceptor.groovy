@@ -9,8 +9,8 @@ class NewRelicInterceptor {
     }
 
     boolean before() {
-        if(controllerName) {
-            newRelicService.setTransactionName(null, "/${controllerName}"+(actionName ? "/${actionName}" : "/"))
+        if (controllerName) {
+            newRelicService.setTransactionName(null, "/${controllerName}" + (actionName ? "/${actionName}" : "/"))
         } else {
             newRelicService.setTransactionName(null, request.getServletPath())
         }
