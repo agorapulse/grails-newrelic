@@ -8,8 +8,8 @@ buildscript {
     }
 }
 
-version "${newrelicApiVersion}.4"
-group "org.grails.plugins"
+version "${newrelicApiVersion}.5"
+group 'org.grails.plugins'
 
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -21,6 +21,13 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url 'https://repo.grails.org/grails/core' }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.grails:grails-bom:$grailsVersion"
+    }
+    applyMavenExclusions false
 }
 
 dependencies {
@@ -52,5 +59,15 @@ dependencies {
     compile "com.newrelic.agent.java:newrelic-api:$newrelicApiVersion"
 }
 
-apply from: './gradle/common.gradle'
-apply from: './gradle/grailsPublish.gradle'
+grailsPublish {
+    userOrg = 'agorapulse'
+    githubSlug = 'agorapulse/grails-newrelic'
+    license {
+        name = 'Apache-2.0'
+    }
+    title = "newrelic"
+    desc = "Grails NewRelic plugin"
+    developers = [benorama:"Benoit Hediard"]
+    portalUser = ""
+    portalPassword = ""
+}
