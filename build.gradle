@@ -5,11 +5,10 @@ buildscript {
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:${gradleArtifactoryVersion}"
     }
 }
 
-version "${newrelicApiVersion}.1"
+version "${newrelicApiVersion}.2"
 group "org.grails.plugins"
 
 apply plugin: 'eclipse'
@@ -17,7 +16,6 @@ apply plugin: 'idea'
 apply plugin: 'org.grails.grails-plugin'
 apply plugin: 'org.grails.grails-plugin-publish'
 apply plugin: 'org.grails.grails-gsp'
-apply plugin: 'com.jfrog.artifactory'
 
 repositories {
     mavenLocal()
@@ -55,7 +53,4 @@ dependencies {
 }
 
 apply from: './gradle/common.gradle'
-
-apply from: './gradle/artifactory.gradle'
-
 apply from: './gradle/grailsPublish.gradle'
