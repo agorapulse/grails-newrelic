@@ -1,11 +1,10 @@
 package grails.plugin.newrelic
 
-import grails.test.mixin.TestFor
+import grails.testing.web.taglib.TagLibUnitTest
 import grails.util.Environment
 import spock.lang.Specification
 
-@TestFor(NewRelicTagLib)
-class NewRelicTagLibSpec extends Specification {
+class NewRelicTagLibSpec extends Specification implements TagLibUnitTest<NewRelicTagLib> {
 
     def "should be enabled for PRODUCTION by default"() {
         when:

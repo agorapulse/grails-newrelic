@@ -1,11 +1,10 @@
 package grails.plugin.newrelic
 
-import grails.test.mixin.TestFor
+import grails.testing.services.ServiceUnitTest
 import grails.util.Environment
 import spock.lang.Specification
 
-@TestFor(NewRelicService)
-class NewRelicServiceSpec extends Specification {
+class NewRelicServiceSpec extends Specification implements ServiceUnitTest<NewRelicService> {
 
     def "should be enabled for PRODUCTION by default"() {
         when:
