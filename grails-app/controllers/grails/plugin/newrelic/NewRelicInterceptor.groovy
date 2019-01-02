@@ -1,5 +1,7 @@
 package grails.plugin.newrelic
 
+import org.grails.web.util.WebUtils
+
 class NewRelicInterceptor {
 
     NewRelicService newRelicService
@@ -9,7 +11,10 @@ class NewRelicInterceptor {
     }
 
     boolean before() {
-        if(controllerName) {
+        if (request.getAttribute(WebUtils.EXCEPTION_ATTRIBUTE)) {
+            // error controllers
+            newRelicService.setTransactionName(null, request.forwardURI)
+        } else if(controllerName) {
             newRelicService.setTransactionName(null, "/${controllerName}"+(actionName ? "/${actionName}" : "/"))
         } else {
             newRelicService.setTransactionName(null, request.getServletPath())
