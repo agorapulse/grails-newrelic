@@ -31,7 +31,7 @@ repositories {
 }
 dependencies {
     ...
-    compile "org.grails.plugins:newrelic:4.0.1"
+    compile "org.grails.plugins:newrelic:4.9.0"
 }
 ```
 
