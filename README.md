@@ -8,6 +8,7 @@ NewRelic Grails Plugin
 
 This plugin will make [New Relic](http://newrelic.com) instrumentation available to a Grails project.  
 It is a port to Grails 3.X of the original [NewRelic Grails Plugin](https://github.com/Sensis/grails-newrelic-plugin/), originally written by [CP Lim](https://github.com/cplim).
+Starting with version `5.2.0` the plugin is compatibile with Grails 4.
 
 **Grails NewRelic Plugin** provides the following Grails artefacts:
 
@@ -31,7 +32,7 @@ repositories {
 }
 dependencies {
     ...
-    compile "org.grails.plugins:newrelic:4.9.0"
+    compile "org.grails.plugins:newrelic:5.2.0"
 }
 ```
 
