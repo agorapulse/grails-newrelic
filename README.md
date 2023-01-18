@@ -6,6 +6,11 @@ NewRelic Grails Plugin
 
 # Introduction
 
+IMPORTANT: Project retirement
+-------------------------------
+
+**This project is retired. As Micronaut become core of the Grails starting at Grails 4, please, use [Micronaut AWS SDK](https://agorapulse.github.io/micronaut-newrelic) instead.**
+
 This plugin will make [New Relic](http://newrelic.com) instrumentation available to a Grails project.  
 It is a port to Grails 3.X of the original [NewRelic Grails Plugin](https://github.com/Sensis/grails-newrelic-plugin/), originally written by [CP Lim](https://github.com/cplim).
 Starting with version `5.2.0` the plugin is compatibile with Grails 4.
